@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: ${{ github.event_name == 'push' }}
           tags: |
@@ -45,3 +45,5 @@ jobs:
             TARGETARCH=amd64
             DOCKER_VERSION=24.0.6
             BUILDX_VERSION=0.11.2
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
