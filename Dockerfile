@@ -1,6 +1,7 @@
 FROM ghcr.io/actions/actions-runner:latest
 
-RUN sudo apt update -y && sudo apt install build-essential git curl -y
+RUN sudo apt update -y \
+  && sudo apt install build-essential git curl pkg-config -y
 
 ENV HELPER_SCRIPTS=/scripts/helpers
 ENV HOME=/home/runner
