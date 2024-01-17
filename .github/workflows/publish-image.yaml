@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -31,7 +34,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          push: true
+          push: ${{ github.event_name == 'push' }}
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.RUNNER_VERSION}}
