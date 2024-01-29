@@ -48,6 +48,4 @@ jobs:
       - name: Run `packer build`
         if: github.event_name == 'push'
         run: |
-          packer build ./images/ubuntu/templates/docker-ubuntu-22.04.pkr.hcl \
-            --var artifact_image_repository=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} \
-            --var artifact_image_tag=ubuntu-${{github.run_number}}
+          packer build --var artifact_image_repository=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} --var artifact_image_tag=ubuntu-${{github.run_number}} ./images/ubuntu/templates/docker-ubuntu-22.04.pkr.hcl 
