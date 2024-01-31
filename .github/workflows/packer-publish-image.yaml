@@ -49,7 +49,7 @@ jobs:
       - name: Run `packer build`
         if: github.event_name == 'push'
         run: |
-          packer build --var artifact_image_repository=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} --var artifact_image_tag=v0.${{github.run_number}} ./images/ubuntu/templates/docker-ubuntu-22.04.pkr.hcl 
+          packer build --var artifact_image_repository=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} --var artifact_image_tag=${{ env.RUNNER_VERSION }}rc${{ github.run_number }} ./images/ubuntu/templates/docker-ubuntu-22.04.pkr.hcl 
 
       - name: Log into registry ${{ env.REGISTRY }}
         if: github.event_name == 'push'
