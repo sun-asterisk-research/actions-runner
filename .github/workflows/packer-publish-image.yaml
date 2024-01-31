@@ -21,6 +21,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/actions-runner
   PACKER_PRODUCT_VERSION: "1.8.6"
+  RUNNER_VERSION: 2.311.0
 jobs:
   packer:
     runs-on: ubuntu-latest
@@ -61,4 +62,4 @@ jobs:
       - name: Push image to ${{ env.REGISTRY }}
         if: github.event_name == 'push'
         run: |
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v0.${{github.run_number}}
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.RUNNER_VERSION }}rc${{ github.run_number }}
