@@ -7,8 +7,8 @@
 os_label=$(lsb_release -rs)
 
 # update
-apt-get install -y apt-transport-https ca-certificates curl unzip software-properties-common
 apt-get -yq update
+apt-get install -y apt-transport-https ca-certificates curl unzip software-properties-common
 apt-get -yq dist-upgrade
 
 apt-get install -y wget

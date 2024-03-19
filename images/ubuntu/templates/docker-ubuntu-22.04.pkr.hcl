@@ -9,7 +9,7 @@ packer {
 
 variable "base_image_tag" {
   type    = string
-  default = "2.314.1"
+  default = "latest"
 }
 
 variable "artifact_image_repository" {
@@ -60,7 +60,7 @@ variable "install_password" {
 
 
 source "docker" "ubuntu" {
-  image  = "ghcr.io/sun-asterisk-research/actions-runner:${var.base_image_tag}"
+  image  = "ghcr.io/actions/actions-runner:${var.base_image_tag}"
   commit = true
   fix_upload_owner = true
   run_command = ["-d", "-i", "-t", "--", "{{.Image}}"]
@@ -76,7 +76,7 @@ build {
 
   post-processor "docker-tag" {
     repository = "${var.artifact_image_repository}"
-    tags = ["${var.artifact_image_tag}"]
+    tags = ["${var.artifact_image_tag}", "latest"]
   }
 
   provisioner "shell" {
