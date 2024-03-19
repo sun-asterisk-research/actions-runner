@@ -7,6 +7,11 @@ packer {
   }
 }
 
+variable "base_image_tag" {
+  type    = string
+  default = "2.314.1"
+}
+
 variable "artifact_image_repository" {
   type    = string
   default = "ghcr.io/sun-asterisk-research/actions-runner"
@@ -55,7 +60,7 @@ variable "install_password" {
 
 
 source "docker" "ubuntu" {
-  image  = "ghcr.io/sun-asterisk-research/actions-runner:2.311.0"
+  image  = "ghcr.io/sun-asterisk-research/actions-runner:${var.base_image_tag}"
   commit = true
   fix_upload_owner = true
   run_command = ["-d", "-i", "-t", "--", "{{.Image}}"]

@@ -15,7 +15,7 @@ permissions:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/actions-runner
-  RUNNER_VERSION: 2.311.0
+  RUNNER_VERSION: 2.314.1
 
 jobs:
   build:
