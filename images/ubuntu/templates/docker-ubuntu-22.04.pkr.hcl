@@ -65,7 +65,7 @@ source "docker" "ubuntu" {
   fix_upload_owner = true
   run_command = ["-d", "-i", "-t", "--", "{{.Image}}"]
   changes = [
-    "ENV PATH ${HOME}/.cargo/bin:${PATH}"
+    "ENV PATH ${HOME}/.cargo/bin:${PATH}",
     "CMD []",
     "ENTRYPOINT []",
   ]
