@@ -65,6 +65,7 @@ source "docker" "ubuntu" {
   fix_upload_owner = true
   run_command = ["-d", "-i", "-t", "--", "{{.Image}}"]
   changes = [
+  	"ENV PATH /home/runner/.cargo/bin:$PATH",
     "CMD []",
     "ENTRYPOINT []",
   ]
@@ -190,4 +191,10 @@ build {
     scripts             = ["${path.root}/../scripts/build/cleanup.sh"]
     start_retry_timeout = "10m"
   }
+
+  provisioner "shell" {
+		environment_vars = ["HELPER_SCRIPT_FOLDER=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}", "IMAGE_FOLDER=${var.image_folder}"]
+		execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+		scripts          = ["${path.root}/../scripts/build/configure-system.sh"]
+	}
 }
