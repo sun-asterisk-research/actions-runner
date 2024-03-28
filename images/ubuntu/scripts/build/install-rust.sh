@@ -8,8 +8,8 @@
 source $HELPER_SCRIPTS/etc-environment.sh
 source $HELPER_SCRIPTS/os.sh
 
-export RUSTUP_HOME=/etc/skel/.rustup
-export CARGO_HOME=/etc/skel/.cargo
+export RUSTUP_HOME=/home/runner/.rustup
+export CARGO_HOME=/home/runner/.cargo
 
 curl -fsSL https://sh.rustup.rs | sh -s -- -y --default-toolchain=stable --profile=minimal
 
