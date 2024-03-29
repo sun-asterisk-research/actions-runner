@@ -25,6 +25,8 @@ else
     cargo install --locked bindgen-cli cbindgen cargo-audit cargo-outdated
 fi
 
+chown -R runner:runner $RUSTUP_HOME $CARGO_HOME
+
 # Cleanup Cargo cache
 rm -rf ${CARGO_HOME}/registry/*
 
