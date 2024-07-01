@@ -1,4 +1,5 @@
 FROM ghcr.io/actions/actions-runner:latest
+ENV RUNNER_VERSION=2.316.1
 
 RUN sudo apt update -y \
   && sudo apt install build-essential git curl pkg-config libssl-dev -y \
