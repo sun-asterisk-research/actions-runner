@@ -14,7 +14,7 @@
   "regexManagers": [
     {
       "description": "Update actions/runner version",
-      "fileMatch": ["^Dockerfile"],
+      "fileMatch": ["^Dockerfile", "packer-publish-image.yaml"],
       "matchStrings": ["RUNNER_VERSION=(?<currentValue>.*?)\\s"],
       "depNameTemplate": "actions/runner",
       "datasourceTemplate": "github-releases",
