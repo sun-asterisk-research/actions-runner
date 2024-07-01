@@ -24,5 +24,3 @@ RUN rustup component add rustfmt clippy
 
 # Cleanup Cargo cache
 RUN rm -rf ${HOME}/registry/*
-
-RUN sudo /scripts/cleanup.sh
