@@ -15,7 +15,7 @@
     {
       "description": "Update actions/runner version",
       "fileMatch": ["^Dockerfile", "packer-publish-image.yaml"],
-      "matchStrings": ["RUNNER_VERSION=(?<currentValue>.*?)\\s"],
+      "matchStrings": ["RUNNER_VERSION: (?<currentValue>.*?)\\s"],
       "depNameTemplate": "actions/runner",
       "datasourceTemplate": "github-releases",
       "extractVersionTemplate": "^v(?<version>.*)$"
