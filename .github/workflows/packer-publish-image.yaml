@@ -41,7 +41,7 @@ jobs:
         run: |
           packer init ./images/ubuntu/templates/docker-ubuntu-22.04.pkr.hcl
 
-      - name: Run `packer validate`
+      - name: Run `packer validate template`
         id: validate
         run: |
           packer validate ./images/ubuntu/templates/docker-ubuntu-22.04.pkr.hcl
