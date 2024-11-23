@@ -161,6 +161,7 @@ build {
       "${path.root}/../scripts/build/install-cmake.sh",
       "${path.root}/../scripts/build/install-container-tools.sh",
       "${path.root}/../scripts/build/install-git.sh",
+      "${path.root}/../scripts/build/install-curl.sh",
       "${path.root}/../scripts/build/install-github-cli.sh",
       "${path.root}/../scripts/build/install-heroku.sh",
       "${path.root}/../scripts/build/install-java-tools.sh",
