@@ -8,9 +8,13 @@
 source $HELPER_SCRIPTS/os.sh
 source $HELPER_SCRIPTS/install.sh
 
+apt-get install build-essential software-properties-common -y
 # Install GNU C++ compiler
 add-apt-repository ppa:ubuntu-toolchain-r/test -y
 apt-get update -y
+
+# Install GCC snapshot
+apt-get install gcc-snapshot -y
 
 versions=$(get_toolset_value '.gcc.versions[]')
 
