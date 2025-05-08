@@ -188,12 +188,7 @@ build {
     scripts          = ["${path.root}/../scripts/build/install-pipx-packages.sh"]
   }
 
-  provisioner "shell" {
-    execute_command     = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    pause_before        = "1m0s"
-    scripts             = ["${path.root}/../scripts/build/cleanup.sh"]
-    start_retry_timeout = "10m"
-  }
+  
 
   provisioner "shell" {
 		environment_vars = ["HELPER_SCRIPT_FOLDER=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}", "IMAGE_FOLDER=${var.image_folder}"]
