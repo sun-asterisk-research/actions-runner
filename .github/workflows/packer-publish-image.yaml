@@ -5,13 +5,13 @@ on:
     branches:
       - main
     paths:
-      - 'images/**'
+      - 'images/ubuntu/**'
       - '.github/workflows/packer-publish-image.yaml'
   pull_request:
     branches:
       - main
     paths:
-      - 'images/**'
+      - 'images/ubuntu/**'
       - '.github/workflows/packer-publish-image.yaml'
 permissions:
   contents: read
