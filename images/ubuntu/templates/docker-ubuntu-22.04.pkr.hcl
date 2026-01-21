@@ -9,7 +9,7 @@ packer {
 
 variable "base_image_tag" {
   type    = string
-  default = "latest"
+  default = "2.331.0"
 }
 
 variable "artifact_image_repository" {
@@ -163,7 +163,7 @@ build {
       "${path.root}/../scripts/build/install-git.sh",
       "${path.root}/../scripts/build/install-github-cli.sh",
       "${path.root}/../scripts/build/install-heroku.sh",
-      "${path.root}/../scripts/build/install-java-tools.sh",
+      # "${path.root}/../scripts/build/install-java-tools.sh",
       "${path.root}/../scripts/build/install-kubernetes-tools.sh",
       "${path.root}/../scripts/build/install-nvm.sh",
       "${path.root}/../scripts/build/install-nodejs.sh",
