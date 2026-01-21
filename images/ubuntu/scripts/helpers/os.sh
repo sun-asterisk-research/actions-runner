@@ -4,10 +4,10 @@
 ##  Desc:  Helper functions for OS releases
 ################################################################################
 
-is_ubuntu20() {
-    lsb_release -d | grep -q 'Ubuntu 24'
+is_ubuntu22() {
+    lsb_release -rs | grep -q '22.04'
 }
 
-is_ubuntu22() {
-    lsb_release -d | grep -q 'Ubuntu 22'
+is_ubuntu20() {
+    lsb_release -rs | grep -q '24.04'
 }

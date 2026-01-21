@@ -133,6 +133,7 @@ build {
   }
 
   provisioner "shell" {
+    execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     environment_vars = ["DEBIAN_FRONTEND=noninteractive", "HELPER_SCRIPTS=${var.helper_script_folder}", "INSTALLER_SCRIPT_FOLDER=${var.installer_script_folder}"]
     scripts          = ["${path.root}/../scripts/build/install-apt-vital.sh"]
   }
