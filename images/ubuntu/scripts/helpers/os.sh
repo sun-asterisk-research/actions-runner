@@ -5,7 +5,7 @@
 ################################################################################
 
 is_ubuntu20() {
-    lsb_release -d | grep -q 'Ubuntu 20'
+    lsb_release -d | grep -q 'Ubuntu 24'
 }
 
 is_ubuntu22() {

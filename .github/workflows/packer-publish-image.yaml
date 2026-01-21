@@ -7,12 +7,6 @@ on:
     paths:
       - 'images/ubuntu/**'
       - '.github/workflows/packer-publish-image.yaml'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'images/ubuntu/**'
-      - '.github/workflows/packer-publish-image.yaml'
 permissions:
   contents: read
   packages: write
