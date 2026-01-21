@@ -57,7 +57,9 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install -y su
     sudo -E /tmp/scripts/build/install-pipx-packages.sh && \
     sudo -E /tmp/scripts/build/install-docker-cli.sh && \
     sudo -E /tmp/scripts/build/configure-system.sh && \
-    sudo -E /tmp/scripts/helpers/cleanup.sh
+    sudo -E /tmp/scripts/build/install-php.sh  && \
+#    sudo -E /tmp/scripts/build/install-ruby.sh  && \
+    sudo -E /tmp/scripts/helpers/cleanup.sh \
 
 RUN sudo sed -i '/set -eo pipefail/d' /etc/bash.bashrc
 
