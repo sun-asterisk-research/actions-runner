@@ -38,5 +38,5 @@ if  is_ubuntu24 ; then
   EXPECTED_LIBICU_SHA512="a6315482d93606e375c272718d2458870b95e4ed4b672ea8640cf7bc2d2c2f41aea13b798b1e417e1ffc472a90c6aad150d3d293aa9bddec48e39106e4042807"
   ACTUAL_LIBICU_SHA512="$(sha512sum "./libicu70_70.1-2_amd64.deb" | awk '{print $1}')"
   [ "$EXPECTED_LIBICU_SHA512" = "$ACTUAL_LIBICU_SHA512" ] || { echo "libicu checksum mismatch in configure-dpkg.sh"; exit 1;}
-  sudo apt-get install -y ./libicu70_70.1-2_amd64.deb
+  apt-get install -y ./libicu70_70.1-2_amd64.deb
 fi

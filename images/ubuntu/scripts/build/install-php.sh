@@ -21,7 +21,7 @@ php_versions=$(get_toolset_value '.php.versions[]')
 
 for version in $php_versions; do
     echo "Installing PHP $version"
-    apt-get install -y --no-install-recommends \
+    sudo apt update && apt-get install -y --no-install-recommends \
         php$version \
         php$version-amqp \
         php$version-apcu \

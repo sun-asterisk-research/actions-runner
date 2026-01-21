@@ -14,7 +14,7 @@ apt-get install -y --no-install-recommends python3 python3-dev python3-pip pytho
 
 if is_ubuntu24; then
 # Create temporary workaround to allow user to continue using pip
-    sudo cat <<EOF > /etc/pip.conf
+    cat <<EOF > /etc/pip.conf
 [global]
 break-system-packages = true
 EOF

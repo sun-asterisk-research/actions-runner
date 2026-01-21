@@ -5,7 +5,7 @@
 ################################################################################
 
 # Install Azure CLI (instructions taken from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
-curl -fsSL https://aka.ms/InstallAzureCLIDeb | sudo bash
+curl -fsSL https://aka.ms/InstallAzureCLIDeb | bash
 
 echo "azure-cli https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt" >> $HELPER_SCRIPTS/apt-sources.txt
 
