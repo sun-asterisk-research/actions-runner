@@ -1,6 +1,6 @@
 packer {
   required_plugins {
-    azure = {
+    docker = {
       source  = "github.com/hashicorp/docker"
       version = ">= 1.0.9"
     }
@@ -60,25 +60,16 @@ variable "install_password" {
 
 
 source "docker" "ubuntu" {
-  image  = "ghcr.io/actions/actions-runner:${var.base_image_tag}"
-  commit = true
+  image            = "ghcr.io/actions/actions-runner:${var.base_image_tag}"
+  commit           = false
+  export_path      = "runner-image.tar"
   fix_upload_owner = true
-  run_command = ["-d", "-i", "-t", "--", "{{.Image}}"]
-  changes = [
-  	"ENV PATH /home/runner/.cargo/bin:$PATH",
-    "CMD []",
-    "ENTRYPOINT []",
-  ]
+  run_command      = ["-d", "-i", "-t", "--", "{{.Image}}"]
 }
 
 build {
   name = "ubuntu-24.04-actions"
   sources = ["source.docker.ubuntu"]
-
-  post-processor "docker-tag" {
-    repository = "${var.artifact_image_repository}"
-    tags = ["${var.artifact_image_tag}"]
-  }
 
   provisioner "shell" {
     execute_command = "sudo chmod -R 777 {{ .Path }}; {{ .Vars }} {{ .Path }}"
@@ -164,7 +155,7 @@ build {
       "${path.root}/../scripts/build/install-git.sh",
       "${path.root}/../scripts/build/install-github-cli.sh",
       "${path.root}/../scripts/build/install-heroku.sh",
-      # "${path.root}/../scripts/build/install-java-tools.sh",
+      "${path.root}/../scripts/build/install-java-tools.sh",
       "${path.root}/../scripts/build/install-kubernetes-tools.sh",
       "${path.root}/../scripts/build/install-nvm.sh",
       "${path.root}/../scripts/build/install-nodejs.sh",
@@ -201,4 +192,17 @@ build {
 		execute_command  = "sudo sh -c '{{ .Vars }} {{ .Path }}'"
 		scripts          = ["${path.root}/../scripts/build/configure-system.sh"]
 	}
+
+  post-processor "docker-import" {
+    repository = "${var.artifact_image_repository}"
+    tag        = "${var.artifact_image_tag}"
+    changes = [
+      "ENV PATH=/home/runner/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "ENV RUNNER_TOOL_CACHE=/opt/hostedtoolcache",
+      "ENV AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache",
+      "ENV ImageOS=${var.image_os}",
+      "USER runner",
+      "WORKDIR /home/runner"
+    ]
+  }
 }

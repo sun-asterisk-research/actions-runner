@@ -57,11 +57,11 @@ install_open_jdk() {
     # Create symlink for Java
     ln -s ${java_version_path} "${java_toolcache_version_path}/x64"
 
-    # add extra permissions to be able execute command without
+    # add extra permissions to be able execute command without sudo
     chmod -R 777 /usr/lib/jvm
 }
 
-# Add Addoptium PPA
+# Add Adoptium PPA
 # apt-key is deprecated, dearmor and add manually
 wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor > /usr/share/keyrings/adoptium.gpg
 echo "deb [signed-by=/usr/share/keyrings/adoptium.gpg] https://packages.adoptium.net/artifactory/deb/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/adoptium.list
@@ -69,6 +69,7 @@ echo "deb [signed-by=/usr/share/keyrings/adoptium.gpg] https://packages.adoptium
 # Get all the updates from enabled repositories.
 apt-get update
 
+# While Ubuntu 24.04 binaries are not released in the Adoptium repo, we will not install Java
 defaultVersion=$(get_toolset_value '.java.default')
 jdkVersionsToInstall=($(get_toolset_value ".java.versions[]"))
 
@@ -84,7 +85,7 @@ for jdkVersionToInstall in ${jdkVersionsToInstall[@]}; do
 done
 
 # Install Ant
-apt-get install -y --no-install-recommends ant ant-optional -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+apt-get install --no-install-recommends ant ant-optional
 set_etc_environment_variable "ANT_HOME" "/usr/share/ant"
 
 # Install Maven

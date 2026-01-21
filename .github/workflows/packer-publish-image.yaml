@@ -43,7 +43,12 @@ jobs:
 
       - name: Run `packer build`
         run: |
-          packer build --var artifact_image_repository=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} --var base_image_tag=${{ env.RUNNER_VERSION }} --var artifact_image_tag=${{ env.RUNNER_VERSION }}rc${{ github.run_number }} ./images/ubuntu/templates/docker-ubuntu-24.04.pkr.hcl
+          if [ "${{ github.ref_name }}" = "pre-release" ]; then
+            IMAGE_TAG="pre-release"
+          else
+            IMAGE_TAG="${{ env.RUNNER_VERSION }}rc${{ github.run_number }}"
+          fi
+          packer build --var artifact_image_repository=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} --var base_image_tag=${{ env.RUNNER_VERSION }} --var artifact_image_tag=${IMAGE_TAG} ./images/ubuntu/templates/docker-ubuntu-24.04.pkr.hcl
 
       - name: Log into registry ${{ env.REGISTRY }}
         if: github.event_name == 'push'
@@ -56,4 +61,9 @@ jobs:
       - name: Push image to ${{ env.REGISTRY }}
         if: github.event_name == 'push'
         run: |
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.RUNNER_VERSION }}rc${{ github.run_number }}
+          if [ "${{ github.ref_name }}" = "pre-release" ]; then
+            IMAGE_TAG="pre-release"
+          else
+            IMAGE_TAG="${{ env.RUNNER_VERSION }}rc${{ github.run_number }}"
+          fi
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${IMAGE_TAG}
