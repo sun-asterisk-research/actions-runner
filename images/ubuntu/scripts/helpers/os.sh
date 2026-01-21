@@ -8,6 +8,6 @@ is_ubuntu22() {
     lsb_release -rs | grep -q '22.04'
 }
 
-is_ubuntu20() {
+is_ubuntu24() {
     lsb_release -rs | grep -q '24.04'
 }

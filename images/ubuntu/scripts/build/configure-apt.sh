@@ -4,6 +4,8 @@
 ##  Desc:  Configure apt, install jq and apt-fast packages.
 ################################################################################
 
+source $HELPER_SCRIPTS/os.sh
+
 # Stop and disable apt-daily upgrade services;
 # #systemctl stop apt-daily.timer
 # #systemctl disable apt-daily.timer
@@ -29,6 +31,8 @@ echo 'APT::Get::Always-Include-Phased-Updates "true";' > /etc/apt/apt.conf.d/99-
 cat <<EOF >> /etc/apt/apt.conf.d/99bad_proxy
 Acquire::http::Pipeline-Depth 0;
 Acquire::http::No-Cache true;
+Acquire::https::Pipeline-Depth 0;
+Acquire::https::No-Cache true;
 Acquire::BrokenProxy    true;
 EOF
 
@@ -36,12 +40,19 @@ EOF
 apt-get purge unattended-upgrades
 
 echo 'APT sources'
-cat /etc/apt/sources.list
+if ! is_ubuntu24; then
+    cat /etc/apt/sources.list
+else
+    cat /etc/apt/sources.list.d/ubuntu.sources
+fi
 
 apt-get update
 # Install jq
 apt-get install jq
 
-# Install apt-fast using quick-install.sh
-# https://github.com/ilikenwf/apt-fast
-#bash -c "$(curl -fsSL https://raw.githubusercontent.com/ilikenwf/apt-fast/master/quick-install.sh)"
+if ! is_ubuntu24; then
+    # Install apt-fast using quick-install.sh
+    # https://github.com/ilikenwf/apt-fast
+    #bash -c "$(curl -fsSL https://raw.githubusercontent.com/ilikenwf/apt-fast/master/quick-install.sh)"
+    echo "apt-fast installation skipped"
+fi
