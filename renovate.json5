@@ -11,15 +11,21 @@
     "renovate",
     "renovate/{{depName}}",
   ],
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "description": "Update actions/runner version",
-      "fileMatch": ["^Dockerfile", "packer-publish-image.yaml"],
-      "matchStrings": ["RUNNER_VERSION: (?<currentValue>.*?)\\s"],
+      "fileMatch": [
+        "^Dockerfile$",
+        "^\\.github/workflows/.*\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "RUNNER_VERSION[=:]\\s*'?(?<currentValue>\\d+\\.\\d+\\.\\d+)'?"
+      ],
       "depNameTemplate": "actions/runner",
       "datasourceTemplate": "github-releases",
       "extractVersionTemplate": "^v(?<version>.*)$"
-    },
+    }
   ],
   "packageRules": [
     {
