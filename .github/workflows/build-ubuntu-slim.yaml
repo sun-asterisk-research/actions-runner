@@ -39,7 +39,7 @@ permissions:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/actions-runner-slim
-  DEFAULT_RUNNER_VERSION: '2.333.1'
+  DEFAULT_RUNNER_VERSION: '2.336.0'
   DEFAULT_IMAGE_VERSION: '1.0.0'
 
 jobs:
