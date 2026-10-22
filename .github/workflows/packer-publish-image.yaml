@@ -16,7 +16,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/actions-runner
   PACKER_PRODUCT_VERSION: "latest"
-  RUNNER_VERSION: 2.338.0
+  RUNNER_VERSION: 2.338.1
 jobs:
   packer:
     runs-on: ubuntu-latest
